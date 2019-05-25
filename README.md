@@ -37,6 +37,10 @@
 
     python app.py -d d:/movies -n 8 https://dwz.cn/ehmEbMyQ
 
+进度在`2%-3%`就不多就可以使用播放器直接播放了（windows上建议使用[PotPlayer](https://potplayer.daum.net/)），这里自行斟酌
+
+![sample](sample.png)
+
 你可以设置默认下载目录和默认线程数
 
     python app.py -set-d d:/movies --set-n 32
