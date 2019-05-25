@@ -1,4 +1,4 @@
-# OneDrive video downloader
+# OneDrive downloader
 
 个人使用OneDrive搭了一个网盘，想在线看视频，但是网速总是不稳定。由于OneDrive可以支持多个连接，（具体最大有多少不清楚）于是采用多线程下载的方法实现视频的边下边播。
 
