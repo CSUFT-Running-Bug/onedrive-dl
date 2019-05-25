@@ -1,3 +1,4 @@
+# coding=utf-8
 import threading
 
 exit_flag = 0

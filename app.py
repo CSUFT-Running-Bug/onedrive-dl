@@ -1,3 +1,4 @@
+# coding=utf-8
 import queue
 import os
 import re
@@ -87,7 +88,7 @@ def get_ranges():
 
     content_disposition = r.headers['Content-Disposition']
     filename = re.search('(?<=filename=").*(?=")', content_disposition).group()
-    ovd_file = re.sub('\\.[a-z]+?$', '.ovd', filename)
+    ovd_file = re.sub('\\.[a-zA-Z0-9]+?$', '.ovd', filename)
     offset = 4 + len(bytes(url, encoding='utf8'))
 
     if os.path.exists(save_dir + ovd_file) and os.path.exists(save_dir + filename):
@@ -127,11 +128,11 @@ def download_piece(dic):
     piece_cnt += 1
     lock.release()
 
-    print('\r进度: %.2f%%' % (piece_cnt / size * 100), end='')
+    print('\r\033[1;33mrate: %.2f%%\033[0m' % (piece_cnt / size * 100), end='')
 
 
 def quit_all(_signal_num, _frame):
-    print('You can use the same command to continue download.')
+    print('\nYou can use the same command to continue download.')
     sys.exit(-1)
 
 
@@ -191,11 +192,14 @@ if __name__ == '__main__':
         thread_num = arg[ap.NUM] if arg[ap.NUM] else cp.get_num()
 
         save_dir = save_dir.replace('\\', '/')
-        if len(save_dir) > 1 and save_dir[-1] != '/':
-            save_dir += '/'
-        if save_dir != '' and not os.path.exists(save_dir):
-            os.mkdir(save_dir)
-        print('save_dir = %s    thread_num = %d' % (save_dir, thread_num))
+        if save_dir != '':
+            if save_dir[-1] != '/':
+                save_dir += '/'
+            if not os.path.exists(save_dir):
+                os.mkdir(save_dir)
+
+        print('--------------------------------')
+        print('save directory:\t%s\nthread number:\t%d' % (save_dir, thread_num))
 
         # main
         main(thread_num)
