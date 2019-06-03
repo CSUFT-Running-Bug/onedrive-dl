@@ -40,7 +40,8 @@ def start(thread_num, work_queue, target):
 
     global exit_flag
     exit_flag = 1
-
+    # 当生产队列为空后（剩余几个消费线程没完全运行完），再join主线程，无法用CTRL-C中断，只能等待子线程执行完
+    # 下载98%-99%的时候无法使用CTRL-C中断程序
     for thread in threads:
         thread.join()
 
