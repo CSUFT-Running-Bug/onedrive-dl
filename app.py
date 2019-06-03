@@ -9,8 +9,7 @@ import threading
 import requests
 from requests.exceptions import ConnectionError, Timeout, ConnectTimeout, ReadTimeout
 
-import args_parser as ap
-import cfg_parser as cp
+from .parser import cfg_parser as cp, args_parser as ap
 import multi_thread
 
 SIZE_1_MB = 2 ** 20
@@ -178,7 +177,7 @@ if __name__ == '__main__':
 
     if setting_flag is None and len(arg[ap.URL]) == 0:
         print('use \'python app.py -h\' or view README to get help')
-        exit(-1)
+        sys.exit(-1)
 
     if setting_flag is not None:
         if st_dir is not None:
